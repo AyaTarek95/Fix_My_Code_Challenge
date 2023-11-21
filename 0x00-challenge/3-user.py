@@ -13,7 +13,6 @@ class User():
     - password: private string hash in MD5
     """
 
-    password = None
 
     def __init__(self):
         """
@@ -21,13 +20,13 @@ class User():
         - assigned an unique `id`
         """
         self.id = str(uuid.uuid4())
-
+        self._password = None
     @property
     def password(self):
         """
         Password getter
         """
-        return self.password
+        return self._password
 
     @password.setter
     def password(self, pwd):
@@ -38,9 +37,9 @@ class User():
         - Hash `pwd` in MD5 before assign to `password`
         """
         if pwd is None or type(pwd) is not str:
-            self.password = None
+            self._password = None
         else:
-            self.password = hashlib.md5(pwd.encode()).hexdigest().lower()
+            self._password = hashlib.md5(pwd.encode()).hexdigest().lower()
 
     def is_valid_password(self, pwd):
         """
@@ -52,9 +51,9 @@ class User():
         """
         if pwd is None or type(pwd) is not str:
             return False
-        if self.password is None:
+        if self._password is None:
             return False
-        return hashlib.md5(pwd.encode()).hexdigest().upper() == self.password
+        return hashlib.md5(pwd.encode()).hexdigest().upper() == self._password
 
 
 if __name__ == '__main__':
@@ -69,7 +68,7 @@ if __name__ == '__main__':
         print("User.id should be unique")
 
     u_pwd = "myPassword"
-    user_1.password = u_pwd
+    user_1._password = u_pwd
     if user_1.password == u_pwd:
         print("User.password should be hashed")
 
