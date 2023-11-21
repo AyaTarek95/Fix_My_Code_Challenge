@@ -13,6 +13,7 @@ class User():
     - password: private string hash in MD5
     """
 
+
     def __init__(self):
         """
         Initialize a new user:
@@ -20,7 +21,6 @@ class User():
         """
         self.id = str(uuid.uuid4())
         self._password = None
-
     @property
     def password(self):
         """
