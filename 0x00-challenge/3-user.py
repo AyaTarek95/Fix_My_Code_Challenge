@@ -51,10 +51,10 @@ class User():
         """
         if pwd is None or type(pwd) is not str:
             return False
-        if self._password is None:
+        elif self._password is None:
             return False
-        return hashlib.md5(pwd.encode()).hexdigest().upper() == self._password
-
+        else:
+            return hashlib.md5(pwd.encode()).hexdigest().lower() == self._password
 
 if __name__ == '__main__':
     print("Test User")
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         print("User.id should be unique")
 
     u_pwd = "myPassword"
-    user_1._password = u_pwd
+    user_1.password = u_pwd
     if user_1.password == u_pwd:
         print("User.password should be hashed")
 
